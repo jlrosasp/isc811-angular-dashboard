@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ChartsModule } from 'ng2-charts';
 
@@ -28,6 +29,7 @@ import { PieChartComponent } from './components/charts/pie-chart/pie-chart.compo
   imports: [
     BrowserModule,
     ChartsModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],
