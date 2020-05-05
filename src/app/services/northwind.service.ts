@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs/internal/Observable';
 
 const URL_API = environment.API.EndPoint.Northwind;
 
@@ -17,5 +18,9 @@ export class NorthwindService {
 
   getSerieHistorica() {
 
+  }
+
+  getCustomers() {
+    return this.http.get(`./assets/json/clientes.json`);
   }
 }

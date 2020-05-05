@@ -1,3 +1,30 @@
+<ng-select class="m-4" 
+           [items]="defaultBindingsList"
+           [clearable]="false"
+           (change)="onChangeDimension($event)"
+           [(ngModel)]="selectedDimension">
+</ng-select>
+
+<p>Select multiple elements</p>
+
+<ng-select
+    [items]="customer$ | async"
+    [multiple]="true"
+    [closeOnSelect]="true"
+    [searchable]="true"
+    bindLabel="name"
+    placeholder="Seleccione un cliente de la lista..."
+    [(ngModel)]="selectedCustomer">
+</ng-select>
+
+<div class="mt-3">
+    Selected value: <br/>
+    <ul>
+        <li *ngFor="let item of selectedCustomer">{{item.name}}</li>
+    </ul>
+    <button (click)="clearModel()" class="btn btn-secondary btn-sm">Clear model</button>
+</div>
+
 <app-pie-chart
     [pieChartLabels]="dataDimension"
     [pieChartData]="dataValues">

@@ -1,7 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 import { ChartsModule } from 'ng2-charts';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,8 +31,12 @@ import { PieChartComponent } from './components/charts/pie-chart/pie-chart.compo
   ],
   imports: [
     BrowserModule,
-    ChartsModule,
+    FormsModule,
     HttpClientModule,
+
+    ChartsModule,
+    NgSelectModule,
+    
     AppRoutingModule
   ],
   providers: [],
