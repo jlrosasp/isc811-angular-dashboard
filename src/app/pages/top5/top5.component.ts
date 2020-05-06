@@ -16,35 +16,42 @@ export class Top5Component implements OnInit {
   dataValues: number[] = [];
   // Data Ng Select 
   defaultBindingsList = [
-    { value: 1, label: 'Cliente' },
-    { value: 2, label: 'Producto' },
-    { value: 3, label: 'Empleado' }
+    { value: 1, label: 'Cliente', dimension: '[Dim Cliente].[Dim Cliente Nombre]' },
+    { value: 2, label: 'Producto', dimension: '[Dim Producto].[Dim Producto Nombre]' },
+    { value: 3, label: 'Empleado', dimension: '[Dim Empleado].[Dim Empleado Nombre]' }
   ];
   selectedDimension = null;
   // Ng-Select Multiple
   customer$: Observable<any>;
-  selectedCustomer: any[] = [];
+  selectedCustomer: string[] = [];
 
   ngOnInit(): void {
     
-    this.selectedDimension = this.defaultBindingsList[2];
-    
-    this.north.getTop5(this.selectedDimension.label, 'DESC').subscribe((result: any)=> {
-      this.dataDimension = result.datosDimension;
-      this.dataValues = result.datosVenta;
-    });
+    this.selectedDimension = this.defaultBindingsList[0];
+    // this.north.getTop5(this.selectedDimension.label, 'DESC').subscribe((result: any)=> {
+    //   this.dataDimension = result.datosDimension;
+    //   this.dataValues = result.datosVenta;
+    // });
 
-    this.customer$ = this.north.getCustomers();
+    this.customer$ = this.north.getItemsByDimension(`${this.selectedDimension.dimension}`, 'ASC');
   }
 
   onChangeDimension($event) {
+    
     this.selectedDimension = $event;
+    this.customer$ = this.north.getItemsByDimension(`${this.selectedDimension.dimension}`, 'ASC');
 
-    this.north.getTop5(this.selectedDimension.label, 'DESC').subscribe((result: any)=> {
+    // this.north.getTop5(this.selectedDimension.label, 'DESC').subscribe((result: any)=> {
+    //   this.dataDimension = result.datosDimension;
+    //   this.dataValues = result.datosVenta;
+    // });
+  }
+
+  onChangeValues() {
+    this.north.getDataPieByDimension(this.selectedDimension.dimension, 'DESC', this.selectedCustomer).subscribe((result: any)=> {
       this.dataDimension = result.datosDimension;
       this.dataValues = result.datosVenta;
     });
-
   }
 
   clearModel() {
